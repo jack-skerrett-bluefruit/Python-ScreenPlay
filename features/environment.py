@@ -7,5 +7,5 @@ def before_all(context : runner.Context):
 
     context.browser = webdriver.Chrome()
 
-def after_all(contest: runner.Context):
+def after_all(context: runner.Context):
     context.browser.quit()
