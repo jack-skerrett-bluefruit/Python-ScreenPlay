@@ -8,4 +8,4 @@ def before_all(context : runner.Context):
     context.browser = webdriver.Chrome()
 
 def after_all(contest: runner.Context):
-	context.browser.quit()
+    context.browser.quit()
