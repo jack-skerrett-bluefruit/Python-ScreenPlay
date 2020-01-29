@@ -10,7 +10,7 @@
 			"type":"python",
 			"request":"launch",
 			"module": "behave",
-			"console": "integratedTerminal"
+			"console": "internalConsole"
 		},
 		{
 			"name": "Python: Current File",
