@@ -1,11 +1,10 @@
-from behave import runner
+from behave import runner, model
 from selenium import webdriver
 
-def before_all(context : runner.Context):
-    print('all')
-    context.aaa = 'helen'
-
+def before_scenario(context: runner.Context, scenario: model.Scenario):
+    context.actors = {}
+    context.actors['hello'] = "World"
     context.browser = webdriver.Chrome()
 
-def after_all(context: runner.Context):
+def after_scenario(context: runner.Context, scenario: model.Scenario):
     context.browser.quit()
