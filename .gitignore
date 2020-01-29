@@ -2,5 +2,5 @@
 .idea/
 
 # Environments
-/env/
+/.venv/
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm -rf env
-python3 -m venv env
+rm -rf .venv
+python3 -m venv .venv
 
-echo run 'source env/bin/activate' to active the environment
+echo run 'source .venv/bin/activate' to active the environment
