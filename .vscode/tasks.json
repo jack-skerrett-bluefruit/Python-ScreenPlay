@@ -27,6 +27,9 @@
 			"windows": {
 				"command": "./install_requirements.bat"
 			},
+			"linux": {
+				"command": "./install_requirements.sh"
+			},
 			"presentation": {
 				"echo": true,
 				"reveal": "always",
