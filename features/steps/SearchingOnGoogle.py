@@ -9,7 +9,6 @@ from selenium.webdriver.common.keys import Keys
 
 @step(u'Byran has opened Google')
 def step_impl(context: runner.Context):
-    context.active_actor = Actor.named('Byran')
     context.browser.get('https://www.google.co.uk')
 
 

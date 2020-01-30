@@ -1,3 +1,4 @@
+from typing import List
 from .ability import Ability
 from .condition import Condition
 from .task_or_action import TaskOrAction
@@ -6,7 +7,7 @@ from .task_or_action import TaskOrAction
 class Actor:
     def __init__(self, name: str):
         self.name = name
-        self.abilities: list[Ability] = []
+        self.abilities: List[Ability] = []
 
     @staticmethod
     def named(name: str):
