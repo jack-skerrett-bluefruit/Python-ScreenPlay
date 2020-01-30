@@ -1,3 +1,3 @@
 behave==1.2.6
 selenium>=3.141.0
--e git+https://github.com/hiddeninplainsight/python-screenplay.git#egg=screenplay_byran_wills_heath
+#-e git+https://github.com/hiddeninplainsight/python-screenplay.git#egg=screenplay_byran_wills_heath

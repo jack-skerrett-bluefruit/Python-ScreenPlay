@@ -1,0 +1,93 @@
+@startuml
+
+hide empty members
+
+StepHandler o--> Context
+
+GivenStep -up-|> StepHandler
+GivenStep *--> Task
+
+WhenStep -up-|> StepHandler
+WhenStep *--> Task
+
+ThenStep -up-|> StepHandler
+ThenStep *--> Question
+ThenStep *--> Condition
+ThenStep *--> Matcher
+
+Context *--> Actor
+
+Actor -left-> Task : <<performs>>
+Actor -right-> Condition : <<checks>>
+Actor *--> Ability
+
+Task *--> Action
+Action --> Ability
+
+Condition --> Question
+Condition --> Matcher
+Question --> Ability : <<queries>>
+
+class StepHandler <<function>> {
+}
+hide StepHandler circle
+
+class GivenStep <<function>> {
+}
+hide GivenStep circle
+
+class WhenStep <<function>> {
+}
+hide WhenStep circle
+
+class ThenStep <<function>> {
+}
+hide ThenStep circle
+
+class Context {
+    actors : dict<name : std, Actor>
+}
+
+class Actor {
+    name: str
+    abilities[]: Ability
+    can(abilities[]: Ability) : None
+    attempts_to(tasks[]: Task) : None
+    should(conditions[]: Condition) : None
+}
+
+abstract class Ability {
+}
+
+note right of Ability
+Interacts with the system
+(e.g. via a serial connection
+to an Arduino)
+end note
+
+class Task {
+    perform_as(actor: Actor) : None
+}
+
+class Action {
+    perform_as(actor: Actor) : None
+}
+
+class Condition {
+    __init__(matcher: Matcher)
+    check_as(actor: Actor) : None
+}
+
+class Question {
+    answered_by(actor: Actor) : Any
+}
+
+abstract class Matcher {
+    matches(answer: Any)
+}
+
+note top of Matcher
+Stores the expected result
+end note
+
+@enduml
