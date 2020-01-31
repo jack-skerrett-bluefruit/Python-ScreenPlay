@@ -1,3 +1,4 @@
+import os
 from screenplay.ability import Ability
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.options import Options as ChromeOptions
@@ -22,7 +23,8 @@ class browse_the_web(Ability):
     @staticmethod
     def _create_Chrome_browser():
         chrome_options = ChromeOptions()
-        chrome_options.add_argument('--headless')
+        if os.getenv('HEADLESS_BROWSER') != 'False':
+            chrome_options.add_argument('--headless')
         return Chrome(chrome_options=chrome_options)
 
     @staticmethod

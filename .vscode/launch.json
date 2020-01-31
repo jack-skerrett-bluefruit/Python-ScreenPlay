@@ -10,7 +10,8 @@
 			"type":"python",
 			"request":"launch",
 			"module": "behave",
-			"console": "internalConsole"
+			"console": "internalConsole",
+			"envFile": "${workspaceFolder}/debug.env"
 		},
 		{
 			"name": "Python: Current File",
