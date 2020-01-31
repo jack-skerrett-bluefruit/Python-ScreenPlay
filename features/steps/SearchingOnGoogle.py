@@ -12,20 +12,20 @@ from screenplay.condition import see_that
 @step(u'{actor} has opened Google')
 def step_impl(context: runner.Context, actor: str):
     context.actors.switch_active(actor)
-    context.actors.active.attempts_to(
+    context.they.attempts_to(
         navigate.to('https://www.google.co.uk')
         )
 
 
 @step(u'they search for "{search_text}"')
 def step_impl(context: runner.Context, search_text: str):
-    context.actors.active.attempts_to(
+    context.they.attempts_to(
         search_for.text(search_text)
         )
 
 
 @step(u"they should see a result for '{expected}'")
 def step_impl(context: runner.Context, expected: str):
-    context.actors.active.should(
+    context.they.should(
         see_that(the_search.result_titles(), contains(expected))
         )
