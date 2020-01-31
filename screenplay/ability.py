@@ -1,2 +1,3 @@
 class Ability:
-    pass
+    def clean_up(self):
+        pass

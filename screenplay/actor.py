@@ -13,6 +13,10 @@ class Actor:
     def named(name: str):
         return Actor(name)
 
+    def clean_up(self):
+        for ability in self.abilities:
+            ability.clean_up()
+
     def can(self, *abilities: Ability):
         self.abilities.extend(abilities)
 

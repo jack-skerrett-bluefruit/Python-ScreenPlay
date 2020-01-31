@@ -16,5 +16,12 @@ class Actors:
     def active(self) -> Actor:
         return self._active
 
+    def switch_active(self, name: str):
+        self._active = self._actors[name]
+
+    def clean_up(self):
+        for name in self._actors:
+            self._actors[name].clean_up()
+
 def add_screenplay_objects_to(context):
     context.actors = Actors()
