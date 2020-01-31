@@ -10,7 +10,7 @@ class _EqualsMatcher(Matcher):
     def matches(self, answer) -> bool:
         if answer == self.expected:
             return True
-        self.fail_message = self.fail_message_format.format(actual = answer, expected = self.expected)
+        self._fail_message = self.fail_message_format.format(actual = answer, expected = self.expected)
         return False
 
 

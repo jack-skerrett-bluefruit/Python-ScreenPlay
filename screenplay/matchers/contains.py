@@ -7,17 +7,12 @@ class _ContainsMatcher(Matcher):
         super().__init__()
         self.expected = expected
         self.fail_message_format = fail_message_format
-        self._fail_message = ''
 
     def matches(self, answer: List) -> bool:
         if answer.count(self.expected) > 0:
             return True
         self._fail_message = self.fail_message_format.format(expected = self.expected)
         return False
-
-    @property
-    def fail_message(self):
-        return self._fail_message
 
 def contains(expected):
     return _ContainsMatcher(expected, 'none of the items were {expected}')
