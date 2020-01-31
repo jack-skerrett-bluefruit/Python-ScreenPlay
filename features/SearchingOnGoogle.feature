@@ -4,4 +4,4 @@ Feature: Searching the internet
   Scenario: Searching for "Hello World"
     Given Byran has opened Google
     When they search for "Hello World"
-    Then they should see results for "Hello World" programs
+    Then they should see a result for '"Hello, World!" program - Wikipedia'

@@ -3,6 +3,9 @@ from behave import runner
 from screenplay import *
 from actions.search_for import search_for
 from tasks.navigate import navigate
+from questions.the_search import the_search
+from screenplay.matchers.contains import contains
+from screenplay.condition import see_that
 
 # use_step_matcher("re")
 
@@ -21,6 +24,8 @@ def step_impl(context: runner.Context, search_text: str):
         )
 
 
-@step(u'they should see results for "{expected}" programs')
+@step(u"they should see a result for '{expected}'")
 def step_impl(context: runner.Context, expected: str):
-    pass
+    context.actors.active.should(
+        see_that(the_search.result_titles(), contains(expected))
+        )
