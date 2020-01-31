@@ -1,7 +1,6 @@
-from screenplay.action import Action
-from screenplay.actor import Actor
+from screenplay import Action, Actor
 from tasks.enter_text import enter_text
-from tasks.send_key import send_key
+from tasks.send_key import send_enter_key_to_element_with_name
 
 
 class search_for(Action):
@@ -11,9 +10,5 @@ class search_for(Action):
     def perform_as(self, actor: Actor):
         actor.attempts_to(
             enter_text(self._text).into_textbox_with_name('q'),
-            send_key.enter().to_element_with_name('q')
+            send_enter_key_to_element_with_name('q')
             )
-
-    @staticmethod
-    def text(text: str):
-        return search_for(text)

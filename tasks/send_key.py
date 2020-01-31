@@ -25,16 +25,9 @@ class _send_key_to_element_with_name_task(Task):
         element.send_keys(self._key)
 
 
-class send_key:
-    def __init__(self, key: Keys):
-        self._key = key
+def send_enter_key_to_element_with_id(id: str):
+    return _send_key_to_element_with_id_task(id, Keys.ENTER)
 
-    def to_element_with_id(self, id: str):
-        return _send_key_to_element_with_id_task(id, self._key)
 
-    def to_element_with_name(self, name: str):
-        return _send_key_to_element_with_name_task(name, self._key)
-
-    @staticmethod
-    def enter():
-        return send_key(Keys.ENTER)
+def send_enter_key_to_element_with_name(name: str):
+    return _send_key_to_element_with_name_task(name, Keys.ENTER)
