@@ -1,5 +1,5 @@
 import os
-from screenplay.ability import Ability
+from screenplay import Ability, Actor
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.remote.webdriver import WebDriver
@@ -30,3 +30,6 @@ class browse_the_web(Ability):
     @staticmethod
     def using_Chrome():
         return browse_the_web(browse_the_web._create_Chrome_browser)
+
+def browser_for(actor: Actor) -> WebDriver:
+    return actor.ability(browse_the_web).browser
