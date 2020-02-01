@@ -1,6 +1,5 @@
 from behave import *
 from behave import runner
-from screenplay import *
 from screenplay.matchers.contains import contains
 from screenplay.condition import see_that
 from actions.search_for import search_for
