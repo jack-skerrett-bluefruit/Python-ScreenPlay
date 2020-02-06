@@ -24,7 +24,7 @@ class browse_the_web(Ability):
     def _create_Chrome_browser():
         chrome_options = ChromeOptions()
         if os.getenv('HEADLESS_BROWSER') != 'False':
-            chrome_options.add_argument('--headless')
+            chrome_options.headless = True
         return Chrome(chrome_options=chrome_options)
 
     @staticmethod
