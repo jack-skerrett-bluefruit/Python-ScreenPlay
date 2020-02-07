@@ -10,7 +10,9 @@ class Actors:
         return self._actors[key]
 
     def add_person_called(self, name: str):
-        self._actors[name] = Actor.named(name)
+        a = Actor.named(name)
+        self._actors[name] = a
+        return a
 
     @property
     def active(self) -> Actor:

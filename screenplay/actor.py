@@ -21,6 +21,8 @@ class Actor:
     def can(self, *abilities: Ability):
         self.abilities.extend(abilities)
 
+    who_can = can
+
     def ability(self, ability_type: type):
         for ability in self.abilities:
             if isinstance(ability, ability_type):
