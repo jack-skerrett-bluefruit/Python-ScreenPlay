@@ -2,7 +2,7 @@ from typing import List
 from .ability import Ability
 from .condition import Condition
 from .task_or_action import TaskOrAction
-from .log import _LogIndent
+from .log import Log
 
 
 class Actor:
@@ -29,10 +29,10 @@ class Actor:
 
     def attempts_to(self, *tasks_or_actions: TaskOrAction):
         if len(tasks_or_actions) > 0:
-            _LogIndent.increase_indent()
+            Log.increment_level()
             for task_or_action in tasks_or_actions:
                 task_or_action.perform_as(self)
-            _LogIndent.decrease_indent()
+            Log.decrement_level()
 
     def should(self, *conditions: Condition):
         if len(conditions) > 0:
