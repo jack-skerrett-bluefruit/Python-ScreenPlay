@@ -3,7 +3,7 @@ from typing import List
 
 
 class _ContainsMatcher(Matcher):
-    def __init__(self, expected, fail_message_format = '{actual} is not equal to {expected}'):
+    def __init__(self, expected, fail_message_format = 'none of the items were "{expected}"'):
         super().__init__()
         self.expected = expected
         self.fail_message_format = fail_message_format
@@ -15,4 +15,4 @@ class _ContainsMatcher(Matcher):
         return False
 
 def contains(expected):
-    return _ContainsMatcher(expected, 'none of the items were {expected}')
+    return _ContainsMatcher(expected)
