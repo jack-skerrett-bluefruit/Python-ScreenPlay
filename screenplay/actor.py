@@ -2,6 +2,8 @@ from typing import List
 from .ability import Ability
 from .condition import Condition
 from .task_or_action import TaskOrAction
+from .task import Task
+from .action import Action
 from .log import Log
 
 
@@ -29,12 +31,19 @@ class Actor:
                 return ability
         assert False, "Actor " + self.name + " does not have ability '" + ability_type.__name__ + "'"
 
+    @staticmethod
+    def _set_log_type_before_task_or_action(task_or_action: TaskOrAction):
+        if isinstance(task_or_action, Action):
+            Log.start_logging_actions()
+        else:
+            Log.start_logging_tasks()
+
     def attempts_to(self, *tasks_or_actions: TaskOrAction):
         if len(tasks_or_actions) > 0:
-            Log.increment_level()
             for task_or_action in tasks_or_actions:
+                Actor._set_log_type_before_task_or_action(task_or_action)
                 task_or_action.perform_as(self)
-            Log.decrement_level()
+                Log.end_logging_task_or_action()
 
     def should(self, *conditions: Condition):
         if len(conditions) > 0:

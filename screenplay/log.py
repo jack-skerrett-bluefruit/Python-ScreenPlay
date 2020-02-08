@@ -20,32 +20,44 @@ class _LogIndent:
 
 
 class Log:
-    output_messages_to_level = 0
+    _output_messages_to_level = 0
     _current_level = 0
+    _previous_levels = []
     current_actor = None
+
+    action_log_level = 1
+    task_log_level = 2
 
     @classmethod
     def to_actions(cls):
-        cls.output_messages_to_level = 1
+        cls._output_messages_to_level = cls.action_log_level
 
     @classmethod
     def to_tasks(cls):
-        cls.output_messages_to_level = 2
+        cls._output_messages_to_level = cls.task_log_level
 
     @classmethod
-    def increment_level(cls):
-        cls._current_level = cls._current_level + 1
+    def start_logging_actions(cls):
+        cls._previous_levels.append(cls._current_level)
+        cls._current_level = cls.action_log_level
         _LogIndent.increase_indent()
 
     @classmethod
-    def decrement_level(cls):
-        if cls._current_level > 0:
-            cls._current_level = cls._current_level - 1
+    def start_logging_tasks(cls):
+        cls._previous_levels.append(cls._current_level)
+        cls._current_level = cls.task_log_level
+        _LogIndent.increase_indent()
+
+    @classmethod
+    def end_logging_task_or_action(cls):
+        if len(cls._previous_levels) > 0:
+            cls._current_level = cls._previous_levels.pop()
             _LogIndent.decrease_indent()
+
 
     @classmethod
     def should_log(cls):
-        return cls._current_level <= cls.output_messages_to_level
+        return cls._current_level <= cls._output_messages_to_level
 
 
 def log_message(message: str):
