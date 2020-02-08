@@ -13,6 +13,7 @@ class browse_the_web(Ability):
     def clean_up(self):
         if self._webdriver != None:
             self._webdriver.quit()
+            self._webdriver = None
 
     @property
     def browser(self) -> WebDriver:
