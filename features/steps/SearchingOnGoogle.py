@@ -3,7 +3,7 @@ from behave import runner
 from screenplay.matchers.contains import contains
 from screenplay.condition import see_that
 from actions.search_for import search_for
-from tasks.navigate_to import navigate_to
+from actions.open_google import open_google
 from questions.the_search_result_titles import the_search_result_titles
 
 # use_step_matcher("re")
@@ -12,7 +12,7 @@ from questions.the_search_result_titles import the_search_result_titles
 def step_impl(context: runner.Context, actor: str):
     context.actors.switch_active(actor)
     context.they.attempts_to(
-        navigate_to('https://www.google.co.uk')
+        open_google()
         )
 
 
