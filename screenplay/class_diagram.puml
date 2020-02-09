@@ -18,7 +18,9 @@ ThenStep *--> Matcher
 Context *--> Actor
 
 Actor -left-> Task : <<performs>>
+Actor --> Action : <<performs>>
 Actor -right-> Condition : <<checks>>
+Actor --> Question : <<asks>>
 Actor *--> Ability
 
 Task *--> Action
