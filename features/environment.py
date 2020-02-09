@@ -6,7 +6,7 @@ from abilities.browse_the_web import browse_the_web
 
 
 def before_scenario(context: runner.Context, scenario: model.Scenario):
-    Log.to_tasks()
+    Log.to_actions()
     add_screenplay_objects_to(context)
     context.actors.add_person_called('Byran').who_can(browse_the_web.using_Chrome())
 

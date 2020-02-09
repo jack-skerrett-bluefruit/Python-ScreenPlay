@@ -25,8 +25,8 @@ class Log:
     _previous_levels = []
     current_actor = None
 
-    action_log_level = 1
-    task_log_level = 2
+    task_log_level = 1
+    action_log_level = 2
 
     @classmethod
     def to_actions(cls):

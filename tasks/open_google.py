@@ -1,8 +1,8 @@
-from screenplay import Action, Actor, log_message
-from tasks.navigate_to import navigate_to
+from screenplay import Task, Actor, log_message
+from actions.navigate_to import navigate_to
 
 
-class open_google(Action):
+class open_google(Task):
     @log_message('Open google homepage')
     def perform_as(self, actor: Actor):
         actor.attempts_to(

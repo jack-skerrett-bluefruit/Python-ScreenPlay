@@ -1,10 +1,10 @@
-from screenplay import Action, Actor, log_message
-from tasks.enter_text import enter_text
-from tasks.send_key import send_enter_key_to
+from screenplay import Task, Actor, log_message
+from actions.enter_text import enter_text
+from actions.send_key import send_enter_key_to
 from pages.google_homepage import google_homepage
 
 
-class search_for(Action):
+class search_for(Task):
     def __init__(self, text: str):
         self._text = text
 

@@ -2,8 +2,8 @@ from behave import *
 from behave import runner
 from screenplay.matchers.contains import contains
 from screenplay.condition import see_that
-from actions.search_for import search_for
-from actions.open_google import open_google
+from tasks.search_for import search_for
+from tasks.open_google import open_google
 from questions.the_search_result_titles import the_search_result_titles
 
 # use_step_matcher("re")

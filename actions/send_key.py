@@ -1,10 +1,10 @@
-from screenplay import Task, Actor, log_message
+from screenplay import Action, Actor, log_message
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.keys import Keys
 from abilities.browse_the_web import browser_for
 
 
-class _send_key_to_element(Task):
+class _send_key_to_element(Action):
     def __init__(self, locator, key: Keys, key_name: str):
         self._locator = locator
         self._key = key

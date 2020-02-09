@@ -1,9 +1,9 @@
-from screenplay import Task, Actor, log_message
+from screenplay import Action, Actor, log_message
 from selenium.webdriver.remote.webelement import WebElement
 from abilities.browse_the_web import browser_for
 
 
-class enter_text(Task):
+class enter_text(Action):
     def __init__(self, text: str):
         self._text = text
         self._locator = None
