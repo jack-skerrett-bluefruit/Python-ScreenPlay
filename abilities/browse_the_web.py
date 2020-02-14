@@ -1,4 +1,5 @@
 import os
+import sys
 from screenplay import Ability, Actor
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.options import Options as ChromeOptions
@@ -26,7 +27,9 @@ class browse_the_web(Ability):
         chrome_options = ChromeOptions()
         if os.getenv('HEADLESS_BROWSER') != 'False':
             chrome_options.headless = True
-        return Chrome(chrome_options=chrome_options)
+        if sys.platform.startswith('win'):
+            chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+        return Chrome(options=chrome_options)
 
     @staticmethod
     def using_Chrome():
