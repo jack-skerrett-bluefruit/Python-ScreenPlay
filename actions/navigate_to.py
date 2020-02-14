@@ -1,7 +1,16 @@
+"""Action class to cause the browser to navigate to a URL"""
+
 from screenplay import Action, Actor, log_message
 from abilities.browse_the_web import browser_for
 
 class navigate_to(Action):
+    """
+    Creates an Action class to make the browser to navigate to a URL
+
+    Arguments:
+
+    url - The url to navigate to
+    """
     def __init__(self, url: str):
         self._url = url
 

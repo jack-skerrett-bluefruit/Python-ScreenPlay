@@ -1,3 +1,5 @@
+"""Functions to create Action objects to send keys to webpage elements"""
+
 from screenplay import Action, Actor, log_message
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.keys import Keys
@@ -17,4 +19,12 @@ class _send_key_to_element(Action):
 
 
 def send_enter_key_to(locator):
+    """
+    Creates an Action object to send the enter key to the specified element
+
+    Arguments:
+
+    locator - A tuple with the first element is a selenium By value and the
+    second a string to specify the id/tag/etc...
+    """
     return _send_key_to_element(locator, Keys.ENTER, 'Enter')

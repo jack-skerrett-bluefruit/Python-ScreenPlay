@@ -1,9 +1,21 @@
+"""Action class to enter text into a webpage element"""
+
 from screenplay import Action, Actor, log_message
 from selenium.webdriver.remote.webelement import WebElement
 from abilities.browse_the_web import browser_for
 
 
 class enter_text(Action):
+    """
+    Creates an Action class to enter text into a webpage element.
+    Need to call the 'into' method to specify the element.
+
+    e.g. enter_text('Hello').into(textbox)
+
+    Arguments:
+
+    text - The text to send to the webpage element
+    """
     def __init__(self, text: str):
         self._text = text
         self._locator = None
@@ -14,5 +26,13 @@ class enter_text(Action):
         element.send_keys(self._text)
 
     def into(self, locator):
+        """
+        Specifies the element to enter the text into
+
+        Arguments:
+
+        locator - A tuple with the first element is a selenium By value and
+        the second a string to specify the id/tag/etc...
+        """
         self._locator = locator
         return self
