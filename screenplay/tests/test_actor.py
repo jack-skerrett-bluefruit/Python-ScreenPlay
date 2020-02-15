@@ -1,7 +1,9 @@
 import pytest
-from screenplay import Actor, Ability
+from screenplay import Actor, see_that
+from screenplay.matchers.equals import equals
 from .stub_abilities import *
 from .stub_tasks import *
+from .stub_questions import *
 
 def test_An_actors_name_can_be_retrieved():
     frank = Actor.named('Frank')
@@ -60,3 +62,20 @@ def test_An_Actor_can_perform_Tasks():
     
     assert task1.called, "Task 1 not run"
     assert task2.called, "Task 2 not run"
+
+def test_An_Actor_can_check_conditions_and_does_not_assert_if_the_conditions_are_all_True():
+    david = Actor.named('David')
+
+    david.should(
+        see_that(StubQuestion('1'), equals('1')),
+        see_that(StubQuestion('2'), equals('2'))
+        )
+
+def test_An_Actor_will_assert_if_any_of_the_checked_conditions_are_all_False():
+    david = Actor.named('David')
+
+    with pytest.raises(AssertionError):
+        david.should(
+            see_that(StubQuestion('1'), equals('1')),
+            see_that(StubQuestion('text'), equals('2'))
+            )
