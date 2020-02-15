@@ -1,5 +1,7 @@
 # Python ScreenPlay example
 
+![](https://github.com/byran/Python-ScreenPlay/workflows/.github/workflows/run_tests.yml/badge.svg)
+
 [Linux instructions](#Linux)
 
 [Windows instructions](#Windows)
