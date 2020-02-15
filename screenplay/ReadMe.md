@@ -80,9 +80,7 @@ class value_read_from_the_system(Question):
 ## Matcher
 
 ``` python
-from screenplay import Task, Actor
-from screenplay.log import log_message
-from actions.click_on import click_on
+from screenplay import Matcher
 
 class near_one(Matcher):
     def __init__(self):
