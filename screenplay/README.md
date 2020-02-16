@@ -8,7 +8,8 @@ An ```Ability``` is a class you inherit from to give an ```Actor``` a way to
 interact with the system under test.
 
 ``` python
-from screenplay import Ability, Actor, Actors
+from screenplay import Ability, Actor
+from screenplay.behave import Actors
 
 class interact_with_the_system(Ability):
     def __init__(self):
