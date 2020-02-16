@@ -1,6 +1,6 @@
 """Example file containing a minimum implementation of an Ability"""
 
-from screenplay import Ability, Actor
+from screenplay import Ability
 
 
 class template_ability(Ability):

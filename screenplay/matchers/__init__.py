@@ -1,7 +1,7 @@
-from .contains import *
-from .equals import *
+from .contains import contains
+from .equals import is_, equals
 
 __all__ = [
-    'contains', # contains.py
-    'is_', 'equals' # equals.py
-    ]
+    'contains',  # contains.py
+    'is_', 'equals'  # equals.py
+]

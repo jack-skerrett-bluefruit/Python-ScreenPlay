@@ -1,9 +1,9 @@
-from .ability import *
-from .action import *
-from .actor import *
-from .condition import *
-from .question import *
-from .task import *
+from .ability import Ability
+from .action import Action
+from .actor import Actor
+from .condition import see_that
+from .question import Question
+from .task import Task
 from .log import log_message
 
-__all__ = [ 'Ability', 'Action', 'Actor', 'Condition', 'Question', 'Task', 'log_message' ]
+__all__ = ['Ability', 'Action', 'Actor', 'see_that', 'Question', 'Task', 'log_message']

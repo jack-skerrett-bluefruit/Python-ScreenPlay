@@ -12,13 +12,13 @@ class browse_the_web(Ability):
         self._webdriver = None
 
     def clean_up(self):
-        if self._webdriver != None:
+        if self._webdriver is None:
             self._webdriver.quit()
             self._webdriver = None
 
     @property
     def browser(self) -> WebDriver:
-        if self._webdriver == None:
+        if self._webdriver is None:
             self._webdriver = self._create_browser_function()
         return self._webdriver
 
@@ -34,6 +34,7 @@ class browse_the_web(Ability):
     @staticmethod
     def using_Chrome():
         return browse_the_web(browse_the_web._create_Chrome_browser)
+
 
 def browser_for(actor: Actor) -> WebDriver:
     return actor.ability(browse_the_web).browser

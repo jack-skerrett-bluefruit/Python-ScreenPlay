@@ -13,4 +13,4 @@ class search_for(Task):
         actor.attempts_to(
             enter_text(self._text).into(google_homepage.search_textbox),
             send_enter_key_to(google_homepage.search_textbox)
-            )
+        )

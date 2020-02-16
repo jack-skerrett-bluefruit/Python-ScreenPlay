@@ -7,12 +7,12 @@ class _LogIndent:
 
     @classmethod
     def increase_indent(cls):
-        cls.current_indent  = cls.current_indent + cls.indent_size
+        cls.current_indent = cls.current_indent + cls.indent_size
 
     @classmethod
     def decrease_indent(cls):
         if cls.current_indent > cls.indent_size:
-            cls.current_indent  = cls.current_indent - cls.indent_size
+            cls.current_indent = cls.current_indent - cls.indent_size
 
     @classmethod
     def indent(cls) -> str:
@@ -54,7 +54,6 @@ class Log:
             cls._current_level = cls._previous_levels.pop()
             _LogIndent.decrease_indent()
 
-
     @classmethod
     def should_log(cls):
         return cls._current_level <= cls._output_messages_to_level
@@ -70,4 +69,3 @@ def log_message(message: str):
             return value
         return wrapper_log_message
     return decorator_log_message
-

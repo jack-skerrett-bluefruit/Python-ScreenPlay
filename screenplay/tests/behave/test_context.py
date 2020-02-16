@@ -3,8 +3,10 @@ from screenplay import Actor
 
 from screenplay.tests.stub_abilities import StubAbility
 
+
 class Context:
     pass
+
 
 def test_An_Actors_object_is_added_to_a_context():
     context = Context()
@@ -12,6 +14,7 @@ def test_An_Actors_object_is_added_to_a_context():
     add_screenplay_objects_to(context)
 
     assert isinstance(context.actors, Actors)
+
 
 def test_The_they_Actor_object_is_added_to_a_context():
     context = Context()
@@ -23,12 +26,14 @@ def test_The_they_Actor_object_is_added_to_a_context():
 
     assert isinstance(context.they, Actor)
 
+
 def test_Ability_objects_can_be_added_to_Actors_easily():
     context = Context()
 
     add_screenplay_objects_to(context)
 
     context.actors.add_person_called('Simon').who_can(StubAbility())
+
 
 def test_The_Ability_objects_of_all_Actor_objects_are_cleaned_up_when_the_Actors_object_is_cleaned():
     context = Context()

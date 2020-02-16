@@ -1,6 +1,5 @@
 from behave import runner, model
-from selenium import webdriver
-from screenplay.behave import *
+from screenplay.behave import add_screenplay_objects_to
 from screenplay.log import Log
 from abilities.browse_the_web import browse_the_web
 

@@ -2,7 +2,6 @@ from typing import List
 from .ability import Ability
 from .condition import Condition
 from .task_or_action import TaskOrAction
-from .task import Task
 from .action import Action
 from .log import Log
 

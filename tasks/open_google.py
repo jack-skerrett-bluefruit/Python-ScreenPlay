@@ -7,4 +7,4 @@ class open_google(Task):
     def perform_as(self, actor: Actor):
         actor.attempts_to(
             navigate_to('https://www.google.co.uk')
-            )
+        )

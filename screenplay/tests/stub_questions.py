@@ -1,5 +1,6 @@
 from screenplay import Question
 
+
 class StubQuestion(Question):
     def __init__(self, answer):
         self.answer = answer

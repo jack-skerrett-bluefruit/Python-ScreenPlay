@@ -1,6 +1,7 @@
 from typing import Dict
 from ..actor import Actor
 
+
 class Actors:
     def __init__(self):
         self._actors: Dict[str, Actor] = {}
@@ -24,6 +25,7 @@ class Actors:
     def clean_up(self):
         for name in self._actors:
             self._actors[name].clean_up()
+
 
 def add_screenplay_objects_to(context):
     context.actors = Actors()
