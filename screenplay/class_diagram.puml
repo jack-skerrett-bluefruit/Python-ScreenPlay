@@ -14,9 +14,9 @@ ThenStep *--> Question
 ThenStep *--> Condition
 ThenStep *--> Matcher
 
-Context *--> Actors
+Context *--> behave.Actors
 
-Actors *--> Actor
+behave.Actors *--> Actor
 
 Actor -left-> Task : <<performs>>
 Actor --> Action : <<performs>>
@@ -49,12 +49,14 @@ class Context {
     they : Actor
 }
 
-class Actors {
-    actors : dict<name : std, Actor>
-    __getitem__(key: str) : Actor
-    add_person_called(name: str) : Actor
-    switch_active(name: str) : None
-    clean_up() : None
+namespace behave {
+    class Actors {
+        actors : dict<name : std, Actor>
+        __getitem__(key: str) : Actor
+        add_person_called(name: str) : Actor
+        switch_active(name: str) : None
+        clean_up() : None
+    }
 }
 
 class Actor {
