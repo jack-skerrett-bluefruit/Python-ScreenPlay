@@ -2,18 +2,6 @@
 
 ![Class diagram](class_diagram.png)
 
-## Actor
-
-``` python
-from screenplay import Actor
-
-actor = Actor.named('bob')
-actor.can(interact_with_the_system())
-```
-
-**NOTE - This is not how an actor is normally created.
-Normally you would use the `Actors.add_person_called(...)` method.**
-
 ## Ability
 
 An ```Ability``` is a class you inherit from to give an ```Actor``` a way to
@@ -30,10 +18,40 @@ class interact_with_the_system(Ability):
         # Clean up, called when the Actor who
         # has the ability is no longer required
 
+    def do_something(self):
+        # Interact with the system
+
 # ---
 
 actors = Actors()
 actors.add_person_called('bob').who_can(interact_with_the_system())
+```
+
+## Actor
+
+``` python
+from screenplay import Actor
+
+actor = Actor.named('bob')
+actor.can(interact_with_the_system())
+```
+
+**NOTE - This is not how an actor is normally created.
+Normally you would use the `behave.Actors.add_person_called(...)` method.**
+
+## behave.Actors
+
+``` python
+from screenplay.behave import Actors
+from abilities.interact_with_the_system import interact_with_the_system
+
+actors = Actors()
+actors.add_person_called('Bob').who_can(interact_with_the_system())
+actors.switch_active('Bob')
+
+actors.active.ability(interact_with_the_system).do_something()
+# or if you're using a behave context
+context.they.ability(interact_with_the_system).do_something()
 ```
 
 ## Task
