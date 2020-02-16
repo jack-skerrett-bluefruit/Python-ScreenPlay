@@ -2,20 +2,21 @@
 
 hide empty members
 
-StepHandler o--> Context
 
-GivenStep -up-|> StepHandler
+GivenStep o--> Context
 GivenStep *--> Task
 
-WhenStep -up-|> StepHandler
+WhenStep o--> Context
 WhenStep *--> Task
 
-ThenStep -up-|> StepHandler
+ThenStep o--> Context
 ThenStep *--> Question
 ThenStep *--> Condition
 ThenStep *--> Matcher
 
-Context *--> Actor
+Context *--> Actors
+
+Actors *--> Actor
 
 Actor -left-> Task : <<performs>>
 Actor --> Action : <<performs>>
@@ -29,10 +30,7 @@ Action --> Ability
 Condition --> Question
 Condition --> Matcher
 Question --> Ability : <<queries>>
-
-class StepHandler <<function>> {
-}
-hide StepHandler circle
+see_that -u-|> Condition
 
 class GivenStep <<function>> {
 }
@@ -47,12 +45,21 @@ class ThenStep <<function>> {
 hide ThenStep circle
 
 class Context {
+    actors : Actors
+    they : Actor
+}
+
+class Actors {
     actors : dict<name : std, Actor>
+    __getitem__(key: str) : Actor
+    add_person_called(name: str) : Actor
+    switch_active(name: str) : None
+    clean_up() : None
 }
 
 class Actor {
     name: str
-    abilities[]: Ability
+    ability(ability_type: type) : Ability
     can(abilities[]: Ability) : None
     attempts_to(tasks[]: Task) : None
     should(conditions[]: Condition) : None
@@ -76,8 +83,11 @@ class Action {
 }
 
 class Condition {
-    __init__(matcher: Matcher)
+    __init__(question: Question, matcher: Matcher)
     check_as(actor: Actor) : None
+}
+
+class see_that {
 }
 
 class Question {
