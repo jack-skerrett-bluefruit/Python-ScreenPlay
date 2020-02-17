@@ -42,6 +42,9 @@
 		{
 			"label": "Lint",
 			"type": "shell",
+			"windows": {
+				"command": "./lint.bat"
+			},
 			"linux": {
 				"command": "./lint.sh"
 			},
