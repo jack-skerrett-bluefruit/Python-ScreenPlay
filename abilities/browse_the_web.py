@@ -1,15 +1,32 @@
 import os
 import sys
+from typing import List
 from screenplay import Ability, Actor
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.remote.webdriver import WebDriver, WebElement
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
+class WaitingWebDriver:
+    def __init__(self, driver):
+        self._driver: WebDriver = driver
+        self._wait = WebDriverWait(driver, 10)
+
+    def get(self, url):
+        return self._driver.get(url)
+
+    def find_element(self, by, value) -> WebElement:
+        return self._wait.until(EC.visibility_of_element_located((by, value)))
+    
+    def find_elements(self, by, value) -> List[WebElement]:
+        return self._wait.until(EC.visibility_of_any_elements_located((by, value)))
 
 class browse_the_web(Ability):
     def __init__(self, create_browser_function: type):
         self._create_browser_function = create_browser_function
         self._webdriver = None
+        self._waiting_webdriver = None
 
     def clean_up(self):
         if self._webdriver is None:
@@ -21,6 +38,12 @@ class browse_the_web(Ability):
         if self._webdriver is None:
             self._webdriver = self._create_browser_function()
         return self._webdriver
+
+    @property
+    def waiting_browser(self) -> WaitingWebDriver:
+        if self._waiting_webdriver is None:
+            self._waiting_webdriver = WaitingWebDriver(self.browser)
+        return self._waiting_webdriver
 
     @staticmethod
     def _create_Chrome_browser():
@@ -38,3 +61,7 @@ class browse_the_web(Ability):
 
 def browser_for(actor: Actor) -> WebDriver:
     return actor.ability(browse_the_web).browser
+
+def waiting_browser_for(actor: Actor) -> WaitingWebDriver:
+    return actor.ability(browse_the_web).waiting_browser
+
