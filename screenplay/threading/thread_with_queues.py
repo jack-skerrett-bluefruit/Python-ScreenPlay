@@ -49,6 +49,6 @@ class ThreadWithQueues:
 
     def start(self):
         self._thread.start()
-    
+
     def join(self, timeout=None):
         self._thread.join(timeout=timeout)

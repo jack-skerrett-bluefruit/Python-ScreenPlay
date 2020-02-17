@@ -8,6 +8,7 @@ from selenium.webdriver.remote.webdriver import WebDriver, WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 class WaitingWebDriver:
     def __init__(self, driver):
         self._driver: WebDriver = driver
@@ -18,9 +19,10 @@ class WaitingWebDriver:
 
     def find_element(self, by, value) -> WebElement:
         return self._wait.until(EC.visibility_of_element_located((by, value)))
-    
+
     def find_elements(self, by, value) -> List[WebElement]:
         return self._wait.until(EC.visibility_of_any_elements_located((by, value)))
+
 
 class browse_the_web(Ability):
     def __init__(self, create_browser_function: type):
@@ -62,6 +64,6 @@ class browse_the_web(Ability):
 def browser_for(actor: Actor) -> WebDriver:
     return actor.ability(browse_the_web).browser
 
+
 def waiting_browser_for(actor: Actor) -> WaitingWebDriver:
     return actor.ability(browse_the_web).waiting_browser
-
