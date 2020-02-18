@@ -10,12 +10,16 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 class WaitingWebDriver:
-    def __init__(self, driver):
-        self._driver: WebDriver = driver
-        self._wait = WebDriverWait(driver, 10)
+    def __init__(self, webdriver, ignored_exceptions=None):
+        self._webdriver: WebDriver = webdriver
+        self._wait = WebDriverWait(webdriver, 10, ignored_exceptions=ignored_exceptions)
+
+    @property
+    def browser(self) -> WebDriver:
+        return self._webdriver
 
     def get(self, url):
-        return self._driver.get(url)
+        return self._webdriver.get(url)
 
     def find_element(self, by, value) -> WebElement:
         return self._wait.until(EC.visibility_of_element_located((by, value)))
@@ -23,12 +27,14 @@ class WaitingWebDriver:
     def find_elements(self, by, value) -> List[WebElement]:
         return self._wait.until(EC.visibility_of_any_elements_located((by, value)))
 
+    def until(self, action):
+        return self._wait.until(action)
+
 
 class browse_the_web(Ability):
     def __init__(self, create_browser_function: type):
         self._create_browser_function = create_browser_function
         self._webdriver = None
-        self._waiting_webdriver = None
 
     def clean_up(self):
         if self._webdriver is None:
@@ -41,11 +47,8 @@ class browse_the_web(Ability):
             self._webdriver = self._create_browser_function()
         return self._webdriver
 
-    @property
-    def waiting_browser(self) -> WaitingWebDriver:
-        if self._waiting_webdriver is None:
-            self._waiting_webdriver = WaitingWebDriver(self.browser)
-        return self._waiting_webdriver
+    def waiting_browser(self, ignored_exceptions=None) -> WaitingWebDriver:
+        return WaitingWebDriver(self.browser, ignored_exceptions)
 
     @staticmethod
     def _create_Chrome_browser():
@@ -65,5 +68,5 @@ def browser_for(actor: Actor) -> WebDriver:
     return actor.ability(browse_the_web).browser
 
 
-def waiting_browser_for(actor: Actor) -> WaitingWebDriver:
-    return actor.ability(browse_the_web).waiting_browser
+def waiting_browser_for(actor: Actor, ignored_exceptions=None) -> WaitingWebDriver:
+    return actor.ability(browse_the_web).waiting_browser(ignored_exceptions=ignored_exceptions)
