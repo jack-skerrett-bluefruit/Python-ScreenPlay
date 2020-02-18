@@ -11,14 +11,14 @@ from questions.the_search_result_titles import the_search_result_titles
 @step(u'{actor} has opened Google')
 def step_impl(context: runner.Context, actor: str):
     context.actors.switch_active(actor)
-    context.they.attempts_to(
+    context.they.attempt_to(
         open_google()
     )
 
 
 @step(u'they search for "{search_text}"')
 def step_impl(context: runner.Context, search_text: str):
-    context.they.attempts_to(
+    context.they.attempt_to(
         search_for(search_text)
     )
 

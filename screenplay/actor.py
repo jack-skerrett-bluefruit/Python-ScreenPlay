@@ -44,6 +44,8 @@ class Actor:
                 task_or_action.perform_as(self)
                 Log.end_logging_task_or_action()
 
+    attempt_to = attempts_to
+
     def should(self, *conditions: Condition):
         if len(conditions) > 0:
             for condition in conditions:
