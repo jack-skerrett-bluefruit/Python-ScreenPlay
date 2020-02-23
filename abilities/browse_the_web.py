@@ -37,7 +37,7 @@ class browse_the_web(Ability):
         self._webdriver = None
 
     def clean_up(self):
-        if self._webdriver is None:
+        if self._webdriver is not None:
             self._webdriver.quit()
             self._webdriver = None
 
