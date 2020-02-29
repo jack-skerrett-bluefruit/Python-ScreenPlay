@@ -11,3 +11,6 @@ __pycache__/
 
 # Python package build directories
 *.egg-info/
+
+# Screen play results output file
+/screenplay.output
