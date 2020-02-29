@@ -12,7 +12,7 @@ class ScreenplayFormatter(Formatter):
         super().__init__(stream_opener, config)
         self.stream: IO[Any] = self.open()
         self.steps = []
-        self.xml = ET.Element('results')
+        self.xml = ET.Element('features')
         Log.write_line = self.write_function()
 
     def write_function(self):
