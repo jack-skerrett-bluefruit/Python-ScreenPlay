@@ -8,3 +8,6 @@
 
 # Python cache
 __pycache__/
+
+# Python package build directories
+*.egg-info/
