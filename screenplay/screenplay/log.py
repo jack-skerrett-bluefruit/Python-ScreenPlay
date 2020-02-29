@@ -24,7 +24,7 @@ class Log:
     _current_level = 0
     _previous_levels = []
     current_actor = None
-    write_line=print
+    write_line = print
 
     task_log_level = 1
     action_log_level = 2

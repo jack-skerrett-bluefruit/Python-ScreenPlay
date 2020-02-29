@@ -4,7 +4,7 @@ from typing import IO, Any
 from xml.etree import ElementTree as ET
 import time
 from itertools import chain
-from ..log import Log, _LogIndent
+from ..log import Log
 
 
 class ScreenplayFormatter(Formatter):
@@ -17,7 +17,7 @@ class ScreenplayFormatter(Formatter):
 
     def write_function(self):
         def formatter_write_line(*values, sep=''):
-            self.step_text += sep.join(map(str,chain.from_iterable(values))) + '\n'
+            self.step_text += sep.join(map(str, chain.from_iterable(values))) + '\n'
         return formatter_write_line
 
     def feature(self, feature):
