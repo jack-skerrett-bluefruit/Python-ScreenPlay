@@ -24,6 +24,7 @@ class Log:
     _current_level = 0
     _previous_levels = []
     current_actor = None
+    write_line=print
 
     task_log_level = 1
     action_log_level = 2
@@ -64,7 +65,7 @@ def log_message(message: str):
         @functools.wraps(func)
         def wrapper_log_message(*args, **kwargs):
             if Log.should_log():
-                print(_LogIndent.indent(), message.format(self=args[0]), sep='')
+                Log.write_line(_LogIndent.indent(), message.format(self=args[0]), sep='')
             value = func(*args, **kwargs)
             return value
         return wrapper_log_message

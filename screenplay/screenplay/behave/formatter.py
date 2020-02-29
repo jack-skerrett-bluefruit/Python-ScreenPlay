@@ -3,6 +3,8 @@ from behave.model_core import Status
 from typing import IO, Any
 from xml.etree import ElementTree as ET
 import time
+from itertools import chain
+from ..log import Log, _LogIndent
 
 
 class ScreenplayFormatter(Formatter):
@@ -11,6 +13,12 @@ class ScreenplayFormatter(Formatter):
         self.stream: IO[Any] = self.open()
         self.steps = []
         self.xml = ET.Element('results')
+        Log.write_line = self.write_function()
+
+    def write_function(self):
+        def formatter_write_line(*values, sep=''):
+            self.step_text += sep.join(map(str,chain.from_iterable(values))) + '\n'
+        return formatter_write_line
 
     def feature(self, feature):
         self.feature_xml = ET.SubElement(self.xml, 'feature')
@@ -34,11 +42,15 @@ class ScreenplayFormatter(Formatter):
         self.step_xml = ET.SubElement(self.scenario_xml, 'step')
         self.step_xml.attrib['name'] = step.name
 
+        self.step_text = ''
+
     def result(self, step_result):
         self.step_xml.attrib['status'] = step_result.status.name
 
         if step_result.status.value != Status.passed:
             self.scenario_xml.attrib['status'] = step_result.status.name
+
+        self.step_xml.text = self.step_text
 
     def eof(self):
         self.feature_xml.attrib['time'] = str(time.time() - self.feature_start_time)
