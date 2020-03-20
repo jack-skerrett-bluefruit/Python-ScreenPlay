@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 from .ability import Ability
 from .condition import Condition
 from .task_or_action import TaskOrAction
@@ -10,10 +10,15 @@ class Actor:
     def __init__(self, name: str):
         self.name = name
         self.abilities: List[Ability] = []
+        self._state: Dict[str, any] = {}
 
     @staticmethod
     def named(name: str):
         return Actor(name)
+
+    @property
+    def state(self):
+        return self._state
 
     def clean_up(self):
         for ability in self.abilities:
@@ -38,11 +43,13 @@ class Actor:
             Log.start_logging_tasks()
 
     def attempts_to(self, *tasks_or_actions: TaskOrAction):
+        result = None
         if len(tasks_or_actions) > 0:
             for task_or_action in tasks_or_actions:
                 Actor._set_log_type_before_task_or_action(task_or_action)
-                task_or_action.perform_as(self)
+                result = task_or_action.perform_as(self)
                 Log.end_logging_task_or_action()
+        return result
 
     attempt_to = attempts_to
 

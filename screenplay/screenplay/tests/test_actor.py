@@ -1,8 +1,8 @@
 import pytest
-from screenplay import Actor, see_that
+from screenplay import Actor, see_that, using
 from screenplay.matchers.equals import equals
 from .stub_abilities import StubAbility, SecondStubAbility
-from .stub_tasks import StubTask
+from .stub_tasks import StubTask, StubTaskWithResult
 from .stub_questions import StubQuestion
 
 
@@ -87,3 +87,32 @@ def test_An_Actor_will_assert_if_any_of_the_checked_conditions_are_all_False():
             see_that(StubQuestion('1'), equals('1')),
             see_that(StubQuestion('text'), equals('2'))
         )
+
+
+def test_An_Actors_state_can_be_updated_with_a_using_task():
+    frank = Actor.named('Frank')
+
+    frank.attempts_to(
+        using(StubTaskWithResult(2)).as_('Bob')
+    )
+
+    assert frank.state['Bob'] == 2
+
+
+def test_A_using_task_without_an_id_asserts():
+    frank = Actor.named('Frank')
+
+    with pytest.raises(AssertionError):
+        frank.attempts_to(
+            using(StubTaskWithResult(2))
+        )
+
+
+def test_A_using_task_whose_sub_task_does_not_return_a_value_sets_the_state_to_none():
+    frank = Actor.named('Frank')
+
+    frank.attempts_to(
+        using(StubTask()).as_('Simon')
+    )
+
+    assert frank.state['Simon'] is None
