@@ -3,7 +3,7 @@ from selenium.webdriver.support.ui import Select
 from abilities.browse_the_web import browser_for, waiting_browser_for
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import StaleElementReferenceException
-
+import time
 
 class select_from_dropdown(Action):
     def __init__(self, locator, dropdown_item):
@@ -16,6 +16,7 @@ class select_from_dropdown(Action):
             Select(browser.find_element(*self.locator)).select_by_visible_text(self.dropdown_item)
             return True
 
+        time.sleep(1) #this shouldnt be here thanks please
         waiting_browser_for(actor, StaleElementReferenceException).until(select_item_from_dropdown)
 
 

@@ -1,7 +1,6 @@
 from screenplay import Action, Actor, log_message
 from abilities.browse_the_web import waiting_browser_for
-from selenium.common.exceptions import StaleElementReferenceException
-import time
+from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException
 
 class click_on(Action):
     def __init__(self, locator):
@@ -13,4 +12,4 @@ class click_on(Action):
             browser.find_element(*self._locator).click()
             return True
 
-        waiting_browser_for(actor, StaleElementReferenceException).until(click_on_element)
+        waiting_browser_for(actor, (StaleElementReferenceException, NoSuchElementException)).until(click_on_element)
