@@ -8,6 +8,8 @@ class find_feature(Action):
 
     @log_message('Find a feature called {self.feature_name}')
     def perform_as(self, actor: Actor):
-        actor.attempts_to(
-            feature_list_items = browser_for(actor).find_element(*blast_off.feature_list).find_elements_by_tag_name("li")
-        )
+        feature_list_items = browser_for(actor).find_element(*blast_off.feature_list).find_elements_by_tag_name("li")
+        for item in feature_list_items:
+            if(item.text.split('\n')[0] == self.feature_name):
+                return item
+        return None
