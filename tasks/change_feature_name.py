@@ -8,6 +8,8 @@ from actions.click_on import click_on
 from actions.find_feature import find_feature
 from actions.click_sub_element import click_sub_element
 from actions.click_element import click_element
+from actions.find_feature import find_feature
+import time
 
 
 class change_feature_name(Task):
@@ -17,6 +19,7 @@ class change_feature_name(Task):
 
     @log_message('Change the name of a Feature')
     def perform_as(self, actor: Actor):
+        time.sleep(1) # this shouldnt be here but I dont know how to make it better. I could try and wrap the using in one of those wait until dudes but I dont really understand how the code works and I feel like im just going in circles, trapped in a goldfish bowl of my own ignorance and its no fun
         actor.attempts_to(
             using(find_feature(self.old_title)).as_("current_feature")
         )       
@@ -27,3 +30,4 @@ class change_feature_name(Task):
             enter_text(self.new_title).into(feature_modal.title_textbox),
             click_on(feature_modal.save_button)
         )
+        time.sleep(1) # another stupid sleep needed because im too thick to figure it out

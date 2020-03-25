@@ -13,6 +13,5 @@ Feature: Blast Off - Manage Product Features
   Scenario: Edit a feature name
     Given I am viewing Blast Off
     And the feature "Manage Product Features" exists
-    When "Manage Product Features" is changed to "This Name Has Been Changed"
-    And the Save button is pressed
+    When "Manage Product Features" is changed to "This Name Has Been Changed" and saved
     Then the feature name is "This Name Has Been Changed"

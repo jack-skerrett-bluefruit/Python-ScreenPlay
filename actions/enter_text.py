@@ -2,7 +2,8 @@
 
 from screenplay import Action, Actor, log_message
 from selenium.webdriver.remote.webelement import WebElement
-from abilities.browse_the_web import browser_for
+from abilities.browse_the_web import browser_for, waiting_browser_for
+from selenium.common.exceptions import NoSuchElementException
 
 
 class enter_text(Action):
@@ -22,8 +23,11 @@ class enter_text(Action):
 
     @log_message('Enter text \'{self._text}\' into element "{self._locator}"')
     def perform_as(self, actor: Actor):
-        element: WebElement = browser_for(actor).find_element(*self._locator)
-        element.send_keys(self._text)
+        def entering_text(browser):
+            element: WebElement = browser_for(actor).find_element(*self._locator)
+            element.send_keys(self._text)
+            return True
+        waiting_browser_for(actor, (NoSuchElementException)).until(entering_text)
 
     def into(self, locator):
         """
