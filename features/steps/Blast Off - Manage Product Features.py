@@ -33,7 +33,7 @@ def step_impl(context, title):
         create_new_feature(title = title, description = "THIS WAS WRITTEN AUTOMATICALLY" )
     )
 
-
+@then(u'the feature name is "{title}"')
 @then(u'"{title}" is in the list of features')
 def step_impl(context, title):
     context.they.should(
@@ -66,11 +66,4 @@ def step_impl(context, title):
 def step_impl(context, old_title, new_title):
     context.they.attempt_to(
         change_feature_name(old_title, new_title)
-    )
-
-
-@then(u'the feature name is "{title}"')
-def step_impl(context, title):
-    context.they.should(
-        see_that(the_features_list(), contains(title)),
     )
